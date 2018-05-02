@@ -1,0 +1,100 @@
+<aura:component controller="ltngCtlr" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="TabId" type="string" default="1" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:attribute name="Acc" type="Account[]"/>
+    <aura:attribute name="Con" type="Contact[]"/>
+    <aura:attribute name="Opp" type="Opportunity[]"/>
+    <aura:attribute name="Ld" type="Lead[]"/>
+    
+    <lightning:tabset selectedTabId="{!v.TabId}" >
+        <lightning:tab label="Accounts" id="1">
+            <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                <thead>
+                    <tr class="slds-text-heading--label">
+                        <th scope="col"><div class="slds-truncate" title="Name">Name</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Phone">Phone</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Use the Apex model and controller to fetch server side data -->
+                    <aura:iteration items="{!v.Acc}" var="account">
+                        <tr>
+                            <td><div class="slds-truncate" title="{!account.Name}">{!account.Name}</div></td>
+                            <td><div class="slds-truncate" title="{!account.Phone}">{!account.Phone}</div></td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </lightning:tab>
+        
+        <lightning:tab label="Contacts" id="2">
+            <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                <thead>
+                    <tr class="slds-text-heading--label">
+                        <th scope="col"><div class="slds-truncate" title="Name">First Name</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Phone">Last Name</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Use the Apex model and controller to fetch server side data -->
+                    <aura:iteration items="{!v.Con}" var="Con">
+                        <tr>
+                            <td><div class="slds-truncate" title="{!Con.Name}">{!Con.FirstName}</div></td>
+                            <td><div class="slds-truncate" title="{!Con.Phone}">{!Con.LastName}</div></td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </lightning:tab>
+        
+        <lightning:tab label="Opportunities" id="3">
+            <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">              
+                <thead>
+                    <tr class="slds-text-heading--label">
+                        <th scope="col"><div class="slds-truncate" title="Name">Opportunity Name</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Phone">Close Date </div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Use the Apex model and controller to fetch server side data -->
+                    <aura:iteration items="{!v.Opp}" var="Opp">
+                        <tr>
+                            <td><div class="slds-truncate" title="{!Opp.Name}">{!Opp.Name}</div></td>
+                            <td><div class="slds-truncate" title="{!Opp.Phone}">{!Opp.CloseDate}</div></td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </lightning:tab>        
+        <lightning:tab label="Leads" id="4">
+             <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">              
+                <thead>
+                    <tr class="slds-text-heading--label">
+                        <th scope="col"><div class="slds-truncate" title="Name">Lead Name</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Phone">Close Date </div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Use the Apex model and controller to fetch server side data -->
+                    <aura:iteration items="{!v.Ld}" var="Ld">
+                        <tr>
+                            <td><div class="slds-truncate" title="{!Ld.Name}">{!Ld.Name}</div></td>
+                            <td><div class="slds-truncate" title="{!Ld.Phone}">{!Ld.Status}</div></td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </lightning:tab>        
+    </lightning:tabset>
+    
+    <div class="slds-clearfix">
+        <div class="slds-float_left">
+            <!--disabled the back button on first Tab-->    
+            <lightning:button disabled="{!v.selTabId == '1'}" variant="neutral" label="Back" onclick="{!c.back}" />
+        </div>
+        <div class="slds-float_right">
+            <lightning:button disabled="{!v.selTabId == '4'}" variant="brand" label="Next" onclick="{!c.next}" />
+        </div>
+    </div>
+</aura:component>

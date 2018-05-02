@@ -1,0 +1,22 @@
+public class ltngCtlr {
+@AuraEnabled
+    public static list<Account> getAccounts(){
+        list<Account> Acc = [SELECT Name, Phone FROM Account LIMIT 10];
+        return Acc;
+    }
+    @AuraEnabled
+    public static list<Contact> getContacts(){
+        list<Contact> Con = [SELECT FirstName, LastName FROM Contact LIMIT 10];
+        return Con;
+    }
+    @AuraEnabled
+    public static list<Opportunity> getOpportunities(){
+        list<Opportunity> Opp = [SELECT Name, CloseDate FROM Opportunity LIMIT 10];
+        return Opp;
+    }
+    @AuraEnabled
+    public static list<Lead> getLeads(){
+        list<Lead> Ld = [SELECT Name, Status FROM Lead LIMIT 10];
+        return Ld;
+    }
+}
